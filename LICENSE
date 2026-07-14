@@ -2,12 +2,6 @@ MIT License
 
 Copyright (c) 2026 the $DeFlock community
 
-Applies to all code, design tokens, documentation, register rules, scripts,
-templates, components, ui kit code, and guidelines HTML in this repository,
-EXCEPT the artwork and font files covered by LICENSE-assets.md and the SIL OFL
-license texts in assets/fonts/ (see the Licensing section of readme.md for the
-path-by-path map).
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

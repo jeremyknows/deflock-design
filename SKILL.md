@@ -1,7 +1,12 @@
 ---
 name: deflock-design
 description: Use when creating ANY $DeFlock-branded output — production UI, prototypes, mocks, share cards, posters, stickers, X posts, or motion copy ($DeFlock — community memecoin, unaffiliated with deflock.org). Contains the locked plate palette, type + texture law, composition register with executable press-check, design tokens, React components, and the website ui kit. NOT for unbranded/generic design work, or for changing the locked law itself (that path is AGENTS.md §3).
-user-invocable: true
+license: MIT for code and docs; brand artwork under LICENSE-assets.md; fonts SIL OFL
+compatibility: Any agent that can read files. Token scripts need Node >= 18 (zero npm deps); browser previews need a static HTTP server plus network for CDN dependencies.
+metadata:
+  author: the $DeFlock community
+  version: "1.0.0"
+  user-invocable: true
 ---
 
 Riso/screen-print protest ephemera for a community memecoin (unaffiliated with
