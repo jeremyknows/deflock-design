@@ -1,29 +1,53 @@
 # DeFlock Design
 
-**Agents start here:** `SKILL.md` (task entry + reading order) · `AGENTS.md`
-(implementation handoff). Humans: read on.
+The **$DeFlock** community's design system: a protest-print visual identity
+(riso/screen-print ephemera) packaged as design tokens, React components, ready-made
+templates, and machine-checkable brand rules — built so you can hand this repo to an AI
+agent and get on-brand artwork back.
 
-The design system of the **$DeFlock** community — the web UI tier plus the locked
-riso/screen-print creative law behind it. $DeFlock is a community-made Solana memecoin
-supporting the anti-surveillance movement around [deflock.org](https://deflock.org), the
-open-source OpenStreetMap-based map of Flock Safety ALPR cameras. **$DeFlock is not
-affiliated with, sponsored by, or endorsed by deflock.org or the DeFlock open-source
-project.** The community's products: the **DeflockOnSol website** (a fee-transparency +
-raid-content terminal) and the **content machine** (stickers, posters, comics, X posts,
-motion).
+$DeFlock is a community-made Solana memecoin supporting the anti-surveillance movement
+around [deflock.org](https://deflock.org), the open-source OpenStreetMap-based map of
+Flock Safety ALPR cameras. **$DeFlock is not affiliated with, sponsored by, or endorsed
+by deflock.org or the DeFlock open-source project.**
 
 Voice in one line: *declarative watchdog.* "THEY MAP YOUR PLATES. WE MAP THE CAMERAS."
 
-## Quickstart
-- Specimen cards, ui kit, and templates load React/Babel/Lucide from CDN and fetch local
-  files over XHR — serve the repo root over HTTP (`npx serve` or
-  `python3 -m http.server`), don't open files via `file://`. Network required for the CDN deps.
-- Reference implementation: open `/ui_kits/website/index.html` (append `?presscheck` to
-  run the executable register audit).
-- Token pipeline (plain Node, zero npm deps, run from repo root):
-  `node scripts/generate-tokens.mjs` (compile) · `node scripts/verify-tokens.mjs` (drift guard).
-- Consuming a project: link `styles.css`, self-host the fonts in `assets/fonts/`, compose
-  the components in `components/`, gate artifacts with `register/press-check.js`.
+## Who this is for
+
+- **Community members with an AI agent** (Claude, GPT, Gemini — anything). Clone the
+  repo, point your agent at it ("read SKILL.md, then make me a sticker"), post the
+  result. The rules travel with the repo; your agent enforces them.
+- **Designers** — `guidelines/` holds 23 visual specimen cards; `readme.md` (this file)
+  is the full design guide.
+- **Developers** — `AGENTS.md` is the implementation handoff; `components/` +
+  `styles.css` + the ui kit are the working parts.
+
+## Make your first artifact (5 minutes)
+
+1. **Serve the repo** from its root: `npx serve` (or `python3 -m http.server`). The
+   cards, kit, and templates fetch local files and CDN scripts — opening them straight
+   from disk (`file://`) shows a blank page.
+2. **Look around:** open `/ui_kits/website/index.html` in the browser — that's the whole
+   site rebuilt on this system. Add `?presscheck` to watch the brand audit run.
+3. **Start from a template:** copy `templates/share-card/ShareCard.dc.html` (a 1080×1080
+   social artifact with the brand check pre-wired) and edit the copy and art.
+4. **Check it:** in the browser console run `pressCheck({mode: "expressive"})` — it
+   prints a per-rule table and stamps **PASSED THE PRESS** or **PULLED**. Fix, re-run.
+5. **Ship it** once it passes. Marked artifacts carry the exact line
+   `COMMUNITY-MADE · UNAFFILIATED WITH DEFLOCK.ORG` — that's the deal (see
+   [LICENSE-assets.md](LICENSE-assets.md)).
+
+Working with an AI agent instead? Just tell it: *"Read SKILL.md and make me a
+[sticker / share card / poster / page]."* SKILL.md contains the same flow, written for
+agents.
+
+## Toolchain notes
+
+- Token pipeline (plain Node ≥18, zero npm deps, run from repo root):
+  `node scripts/generate-tokens.mjs` (compile) · `node scripts/verify-tokens.mjs`
+  (drift guard — also runs in CI).
+- Consuming a project: link `styles.css`, self-host the fonts in `assets/fonts/`,
+  compose the components in `components/`, gate artifacts with `register/press-check.js`.
 
 ## Sources
 - Derived from the $DeFlock community's locked creative handoff and an internal design
