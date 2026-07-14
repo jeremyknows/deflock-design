@@ -75,9 +75,18 @@ document.getElementById("f").addEventListener("submit", async (e) => {
   const p = (receipt.payload && typeof receipt.payload === "object") ? receipt.payload : {};
   const okShape = row(!!(receipt.id && p.spec === "df-press-receipt/1" && Array.isArray(p.rules)), "receipt shape", "spec " + (p.spec || "?"));
   if (!okShape) return finish(false);
+  const kind = p.kind || "PRESS"; // pre-1.2.0 receipts: PRESS implied
   const id = "DF-" + (await sha256Hex(stableStringify(p))).slice(0, 16);
   const okId = row(id === receipt.id, "receipt integrity", id === receipt.id ? receipt.id + " recomputes" : "payload altered — computed " + id);
-  const okRules = row(p.verdict === "PASSED THE PRESS" && p.rules.every(r => r && r.pass), "recorded verdict", p.verdict + " · " + p.rules.length + " rules");
+  let okRules;
+  if (kind === "ARTISTS_PROOF") {
+    const failedIds = p.rules.filter(r => r && !r.pass).map(r => r.id).sort().join("|");
+    const departs = Array.isArray(p.departures) ? p.departures.slice().sort().join("|") : null;
+    okRules = row(p.verdict === "ARTIST'S PROOF" && departs !== null && departs === failedIds,
+      "recorded verdict", "ARTIST'S PROOF · off-register by choice: " + (p.departures || []).join(", "));
+  } else {
+    okRules = row(p.verdict === "PASSED THE PRESS" && p.rules.every(r => r && r.pass) && kind === "PRESS", "recorded verdict", p.verdict + " · " + p.rules.length + " rules");
+  }
   // Script-free re-render: fetch the source, strip ALL scripts, render in a sandboxed
   // iframe (no allow-scripts — hostile artifact JS never executes), then run THIS
   // page's own press-check against that DOM. The artifact cannot fake its checker.
@@ -100,10 +109,20 @@ document.getElementById("f").addEventListener("submit", async (e) => {
   await new Promise(r => setTimeout(r, 500)); // fonts/styles settle
   const cdoc = frame.contentDocument;
   const check = pressCheck({ root: cdoc.body, mode: p.mode, set: p.set, quiet: true, stamp: false });
-  const okCheck = row(check.verdict === "PASSED THE PRESS", "register re-run, script-free (" + p.mode + "/" + p.set + ")", check.verdict + (check.fails.length ? " · " + check.fails.join(", ") : ""));
+  // both kinds: the re-run must REPRODUCE the recorded rule table, not necessarily all-pass
+  const recorded = new Map(p.rules.map(r => [r.id, !!r.pass]));
+  const reproduces = check.results.length === p.rules.length && check.results.every(r => recorded.get(r.id) === r.pass);
+  const okCheck = row(reproduces, "register re-run, script-free (" + p.mode + "/" + p.set + ")",
+    reproduces ? check.verdict + " · recorded run reproduces (" + check.results.length + " rules)" : "re-run diverges from the recorded table: " + check.results.filter(r => recorded.get(r.id) !== r.pass).map(r => r.id).join(", "));
+  // keel re-check for proofs: fly the ticker, carry the disclaimer
+  let okKeel = true;
+  if (kind === "ARTISTS_PROOF") {
+    const t = (cdoc.body.textContent || "").toUpperCase();
+    okKeel = row(!/\$DEFLOCK/.test(t) || (t.includes("COMMUNITY-MADE") && t.includes("UNAFFILIATED WITH DEFLOCK.ORG")), "keel", "$DEFLOCK ticker requires the exact disclaimer");
+  }
   const hash = await sha256Hex(serializeForReceipt(cdoc));
   const okBind = row(hash === p.domSha256, "artifact binding", hash === p.domSha256 ? "document sha256 matches" : "hash mismatch — this is not the receipted artifact (got " + hash.slice(0, 16) + "…)");
-  finish(okShape && okId && okRules && okCheck && okBind);
+  finish(okShape && okId && okRules && okCheck && okKeel && okBind);
 });
 </script>
 </body>

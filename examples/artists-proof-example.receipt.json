@@ -1,5 +1,5 @@
 {
- "id": "DF-95a14edb139c2ea8",
+ "id": "DF-fbf5d2990e01281e",
  "payload": {
   "spec": "df-press-receipt/1",
   "checker": "press-check/1.2.0",
@@ -7,29 +7,34 @@
   "tokensLocked": "2026-07-11",
   "mode": "expressive",
   "set": "marked",
-  "kind": "PRESS",
-  "verdict": "PASSED THE PRESS",
-  "departures": [],
+  "kind": "ARTISTS_PROOF",
+  "verdict": "ARTIST'S PROOF",
+  "departures": [
+   "R1 tilt",
+   "R2 occlusion",
+   "R3 figure",
+   "C2 plates"
+  ],
   "rules": [
    {
     "id": "R1 tilt",
-    "pass": true,
-    "detail": "2 rotated element(s); need >=2 with opposing signs"
+    "pass": false,
+    "detail": "0 rotated element(s); need >=2 with opposing signs"
    },
    {
     "id": "R2 occlusion",
-    "pass": true,
-    "detail": "2 element(s) straddle the frame edge"
+    "pass": false,
+    "detail": "0 element(s) straddle the frame edge"
    },
    {
     "id": "R3 figure",
-    "pass": true,
-    "detail": "1 sanctioned figure(s) (murmuration/emblem/camera/mascot)"
+    "pass": false,
+    "detail": "0 sanctioned figure(s) (murmuration/emblem/camera/mascot)"
    },
    {
     "id": "C2 plates",
-    "pass": true,
-    "detail": "paper/ink/red/gadsden only"
+    "pass": false,
+    "detail": "foreign colors: rgb(29, 111, 235)"
    },
    {
     "id": "C1 disclaimer",
@@ -54,7 +59,7 @@
    {
     "id": "L slam-share",
     "pass": true,
-    "detail": "largest slam 96px vs 8% floor 86px"
+    "detail": "largest slam 120px vs 8% floor 86px"
    },
    {
     "id": "T red-share",
@@ -62,7 +67,7 @@
     "detail": "0.0% of frame red-flooded (cap 15%)"
    }
   ],
-  "domSha256": "7f88eb780b0f1d80ce5f468a38dd6c04586dd356f98222be72976c9d794ef33f",
-  "createdAt": "2026-07-14T16:29:56.396Z"
+  "domSha256": "0c66898980f9f9e1c79d460fb6f8c4421f70bbd73b0d8eec7fecdc381ca7f392",
+  "createdAt": "2026-07-14T16:29:25.617Z"
  }
 }

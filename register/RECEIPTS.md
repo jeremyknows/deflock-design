@@ -1,9 +1,23 @@
 # Press Receipts — df-press-receipt/1
 
-WE KEEP RECEIPTS. A press receipt is a tamper-evident, self-verifiable record that a
-specific artifact passed the composition register. It is minted by the same executable
-check that enforces the register (`press-check.js`) — the check is the authority, not a
-key.
+WE KEEP RECEIPTS. A press receipt is a tamper-evident, self-verifiable record of how a
+specific artifact ran against the composition register. It is minted by the same
+executable check that enforces the register (`press-check.js`) — the check is the
+authority, not a key.
+
+## Two kinds of receipt — the register is the house style, not a cage
+
+- **PRESS** (`"kind": "PRESS"`, verdict `PASSED THE PRESS`) — the artifact passes the
+  full register. The house-style badge; what official channels look for.
+- **ARTIST'S PROOF** (`"kind": "ARTISTS_PROOF"`, verdict `ARTIST'S PROOF`) — the
+  artifact departs from the register **on purpose**. In printmaking, an artist's proof
+  is a print pulled outside the numbered edition: legitimate, often more collectible,
+  deliberately non-standard. The receipt records the departures (`departures: [...]`)
+  as provenance, not judgment. Remix loudly — the proof keeps your receipts.
+
+The only thing that refuses a receipt is the **keel** — the honesty layer: work flying
+the `$DEFLOCK` ticker must carry the exact line
+`COMMUNITY-MADE · UNAFFILIATED WITH DEFLOCK.ORG`. Everything aesthetic is remixable.
 
 ## Mint one
 
@@ -15,8 +29,10 @@ await pressReceipt({ mode: "expressive", set: "marked" })   // ui/clean as appro
 copy(JSON.stringify(window.__lastPressReceipt, null, 1))     // save as my-artifact.receipt.json
 ```
 
-Receipts mint **only on PASS** — a PULLED artifact is refused. Share the receipt JSON
-alongside the artifact, and share the artifact's HTML source (the receipt binds to it).
+Full pass mints a PRESS receipt; departures mint an ARTIST'S PROOF automatically —
+only a keel violation is refused (add the disclaimer line and re-mint). Share the
+receipt JSON alongside the artifact, and share the artifact's HTML source (the receipt
+binds to it).
 
 ## What a receipt contains
 
@@ -30,7 +46,9 @@ alongside the artifact, and share the artifact's HTML source (the receipt binds 
     "tokensLocked": "2026-07-11",
     "mode": "expressive",
     "set": "marked",
+    "kind": "PRESS",
     "verdict": "PASSED THE PRESS",
+    "departures": [],
     "rules": [{ "id": "R1 tilt", "pass": true, "detail": "…" }],
     "domSha256": "<sha256 of the serialized document (html element) with ALL script tags and the press-stamp stripped>",
     "createdAt": "<ISO timestamp, informational>"
@@ -58,9 +76,11 @@ in press-check.js; byte-identical copy in `scripts/verify-receipt.mjs`).
 ## What a receipt proves — and what it doesn't
 
 **Proves:** this exact artifact document (head, styles, and body — everything except
-`<script>` tags), rendered, passed register `1.1.0` under the recorded mode/set, and
-the rule table you're reading is the one the check produced. Any edit to the receipt,
-or any non-script edit to the artifact, breaks verification. External resources
+`<script>` tags), rendered, produced exactly the recorded rule table against register
+`1.1.0` under the recorded mode/set — a full pass for PRESS, the recorded departures
+for an ARTIST'S PROOF. Any edit to the receipt, or any non-script edit to the
+artifact, breaks verification (the verifier requires the re-run to REPRODUCE the
+recorded table, and re-checks the keel for proofs). External resources
 (linked CSS, images) are not hashed — but an external edit that changes composition is
 caught by the register re-run.
 

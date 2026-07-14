@@ -1,13 +1,15 @@
 {
- "id": "DF-21902edf0bda051a",
+ "id": "DF-4ea0457cbbe17854",
  "payload": {
   "spec": "df-press-receipt/1",
-  "checker": "press-check/1.1.0",
+  "checker": "press-check/1.2.0",
   "register": "1.1.0",
   "tokensLocked": "2026-07-11",
   "mode": "expressive",
   "set": "clean",
+  "kind": "PRESS",
   "verdict": "PASSED THE PRESS",
+  "departures": [],
   "rules": [
    {
     "id": "R1 tilt",
@@ -56,6 +58,6 @@
    }
   ],
   "domSha256": "fef7c08f23c8bdb3885c48987d8e0028ca6aabe0b89e0f80883cfa00e890ded6",
-  "createdAt": "2026-07-14T16:13:49.216Z"
+  "createdAt": "2026-07-14T16:29:56.985Z"
  }
 }

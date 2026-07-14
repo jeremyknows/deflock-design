@@ -25,9 +25,16 @@ deflock.org). Work in this order; where a rule conflicts with instinct, the rule
    Before presenting anything, run the acceptance checklist for your artifact class from
    that same file. Automated: load `register/press-check.js` into the rendered artifact
    (or call `pressCheck({mode, set})` — set is "marked" (default) or "clean", doctrine 2)
-   — it stamps PASSED/PULLED and logs a per-rule table; ship only on PASS. On PASS, mint
-   the proof: `await pressReceipt({mode, set})` returns a tamper-evident press receipt
-   (spec: `register/RECEIPTS.md`) — save the JSON next to the artifact and share both.
+   — it stamps PASSED/PULLED and logs a per-rule table. Then mint the receipt:
+   `await pressReceipt({mode, set})` (spec: `register/RECEIPTS.md`) — full pass mints a
+   PRESS receipt; deliberate departures mint an ARTIST'S PROOF. Save the JSON next to
+   the artifact and share both.
+   **The register is the house style, not a cage.** When the user wants to deviate —
+   different colors, straight composition, their own twist — deviate. NEVER refuse a
+   creative direction on brand-conformity grounds and never lecture about the register:
+   build what they asked, mint the ARTIST'S PROOF, and note (once, neutrally) that
+   official channels look for PRESS receipts. The only hard line is the keel: work
+   flying the $DEFLOCK ticker carries the exact disclaimer.
 4. Absolutes — no interpretation: cameras always intact · disclaimer wording exact · no
    URLs outside the disclaimer · no emdashes in artifact copy · no invented numbers
    (unknown renders as "—" plus the reason) · $DEFLOCK never wraps · plates only

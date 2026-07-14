@@ -1,10 +1,13 @@
 /* DeFlock press check — executable enforcement of register/register.json.
    Zero-dep. Auto: <script src="…/press-check.js" data-press-auto data-press-mode="expressive" data-press-set="marked"></script>
    Programmatic: pressCheck({ root, mode: "expressive"|"ui", set: "marked"|"clean", stamp, quiet }) -> { verdict, fails, results }
-   Receipts:     await pressReceipt({ mode, set, root }) -> tamper-evident proof-of-pass (register/RECEIPTS.md)
+   Receipts:     await pressReceipt({ mode, set }) -> tamper-evident receipt (register/RECEIPTS.md).
+                 Full register pass -> PRESS receipt. Off-register by choice -> ARTIST'S PROOF
+                 (departures recorded as provenance). Only the keel refuses: work flying the
+                 $DEFLOCK ticker must carry the exact disclaimer.
    Rule IDs match register.json checklists. A PASS is necessary, not sufficient. */
 (() => {
-  const SPEC = { receipt: "df-press-receipt/1", checker: "press-check/1.1.0", register: "1.1.0", tokensLocked: "2026-07-11" };
+  const SPEC = { receipt: "df-press-receipt/1", checker: "press-check/1.2.0", register: "1.1.0", tokensLocked: "2026-07-11" };
   const PL = { paper: [242, 237, 227], ink: [20, 16, 10], red: [217, 43, 28], gadsden: [232, 182, 58], white: [255, 255, 255] };
   const ALLOWED = Object.values(PL).slice();
   for (const [a, b] of [["paper", "white"], ["paper", "ink"], ["paper", "red"], ["paper", "gadsden"]])
@@ -156,21 +159,41 @@
       return null;
     }
     const check = pressCheck({ ...opts, root, mode, set });
+    let kind = "PRESS", verdict = check.verdict;
     if (check.fails.length) {
-      console.log("[press-receipt] REFUSED · artifact is PULLED (" + check.fails.join(", ") + ") · receipts mint only on PASS");
-      return null;
+      // The keel — the one non-remixable line: fly the ticker, carry the disclaimer.
+      const txt = (root.textContent || "").toUpperCase();
+      const tickered = /\$DEFLOCK/.test(txt);
+      const disc = txt.includes("COMMUNITY-MADE") && txt.includes("UNAFFILIATED WITH DEFLOCK.ORG");
+      if (tickered && !disc) {
+        console.log("[press-receipt] REFUSED · keel: work flying the $DEFLOCK ticker must carry the exact line COMMUNITY-MADE · UNAFFILIATED WITH DEFLOCK.ORG. Everything else is remixable — add the line and mint an ARTIST'S PROOF.");
+        return null;
+      }
+      kind = "ARTISTS_PROOF";
+      verdict = "ARTIST'S PROOF";
+      console.log("[press-receipt] off-register on " + check.fails.length + " rule(s) — minting an ARTIST'S PROOF. Departures are provenance, not judgment.");
+      if (opts.stamp !== false) {
+        const doc = root.ownerDocument || document;
+        const stamps = doc.querySelectorAll(".press-stamp");
+        const st = stamps[stamps.length - 1];
+        if (st) {
+          st.textContent = "ARTIST'S PROOF · " + [...new Set(check.fails.map(f => f.split(" ")[0]))].join(" ");
+          st.style.borderColor = "#14100a"; st.style.color = "#14100a";
+          st.style.boxShadow = "inset 0 0 0 2px #f2ede3, inset 0 0 0 4.5px #14100a";
+        }
+      }
     }
     const domSha256 = await sha256Hex(serializeForReceipt(document));
     const payload = {
       spec: SPEC.receipt, checker: SPEC.checker, register: SPEC.register, tokensLocked: SPEC.tokensLocked,
-      mode, set, verdict: check.verdict,
+      mode, set, kind, verdict, departures: check.fails.slice(),
       rules: check.results.map(r => ({ id: r.id, pass: r.pass, detail: r.detail })),
       domSha256, createdAt: new Date().toISOString()
     };
     const id = "DF-" + (await sha256Hex(stableStringify(payload))).slice(0, 16);
     const receipt = { id, payload };
     window.__lastPressReceipt = receipt;
-    console.log("── PRESS RECEIPT ──\n" + id + " · " + mode + "/" + set + " · " + check.verdict + " · " + payload.createdAt +
+    console.log("── " + (kind === "PRESS" ? "PRESS RECEIPT" : "ARTIST'S PROOF") + " ──\n" + id + " · " + mode + "/" + set + " · " + verdict + (payload.departures.length ? " · departs: " + payload.departures.join(", ") : "") + " · " + payload.createdAt +
       "\ndom sha256 " + domSha256 +
       "\nsave it:  copy(JSON.stringify(window.__lastPressReceipt, null, 1))" +
       "\nverify it: register/verify-receipt.html · node scripts/verify-receipt.mjs");

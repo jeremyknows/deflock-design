@@ -66,10 +66,13 @@ unbroken $DEFLOCK ticker, prose emdashes (marked set) or artwork-only furniture 
 flood ≤15% · A tap targets, reduced-motion, focus-visible (ui).
 A PASS is necessary, not sufficient — the maintainers still rule on register energy.
 
-## Receipts — proof a piece passed
+## Receipts — proof of how a piece ran
 
-A PASS can mint a **press receipt**: `await pressReceipt({ mode, set })` returns a
-tamper-evident record (rule table + artifact DOM hash, self-verifying id) that anyone
-can check with `register/verify-receipt.html` (full re-run + binding) or
-`node scripts/verify-receipt.mjs` (integrity, CI-friendly). Receipts mint only on PASS.
-Official-channel submissions should carry one. Full spec + threat model: `RECEIPTS.md`.
+`await pressReceipt({ mode, set })` mints a tamper-evident record (rule table +
+document hash, self-verifying id) that anyone can check with
+`register/verify-receipt.html` (full script-free re-run + binding) or
+`node scripts/verify-receipt.mjs` (integrity, CI-friendly). Two kinds: **PRESS** (full
+register pass — what official channels look for) and **ARTIST'S PROOF** (deliberately
+off-register; departures recorded as provenance — remixing is welcome). Only the keel
+refuses: fly the $DEFLOCK ticker, carry the exact disclaimer. Full spec + threat
+model: `RECEIPTS.md`.
