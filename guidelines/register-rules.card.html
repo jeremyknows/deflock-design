@@ -1,0 +1,26 @@
+<!-- @dsCard group="Register" viewport="700x250" name="The register rules" subtitle="R1 tilt · R2 occlusion · R3 figure — why token-compliant work still failed without them" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;padding:14px;background:var(--df-color-paper);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.demo{border:var(--df-border-default);position:relative;min-height:200px;overflow:hidden;background:var(--df-halftone-image),var(--df-color-paper);background-size:var(--df-halftone-size),auto}
+.v{position:absolute;font-family:var(--df-font-meta);font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px;z-index:3}
+.slam{font-family:var(--df-font-slam);text-transform:uppercase;line-height:.94;margin:0}
+.stamp{position:absolute;padding:6px 10px;border:3px solid var(--df-color-red);box-shadow:var(--df-stamp-inset);font-family:var(--df-font-meta);font-weight:700;font-size:11px;letter-spacing:.12em;color:var(--df-color-red);text-transform:uppercase;background:var(--df-color-paper)}
+.meta{font-family:var(--df-font-meta);font-weight:700;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;margin:0}</style></head>
+<body>
+<div class="demo">
+  <span class="v" style="left:8px;top:8px;background:var(--df-color-red);color:var(--df-color-paper)">STERILE — REJECTED</span>
+  <div style="position:absolute;inset:26px 14px 14px;display:grid;align-content:center;justify-items:center;gap:8px">
+    <p class="slam" style="font-size:26px;text-align:center">The flock watches back</p>
+    <p class="meta">$DEFLOCK</p>
+  </div>
+</div>
+<div class="demo">
+  <span class="v" style="left:8px;top:8px;background:var(--df-color-ink);color:var(--df-color-paper)">REGISTER — RIGHT</span>
+  <img src="../assets/motifs/motif-sweep.svg" alt="" style="position:absolute;right:-24px;top:18px;width:150px;transform:rotate(2deg)">
+  <div style="position:absolute;inset:26px 14px 14px;display:grid;align-content:center;justify-items:start;gap:6px;transform:rotate(-1.5deg)">
+    <p class="slam" style="font-size:26px;text-shadow:var(--df-misreg-shadow)">The flock<br>watches back</p>
+    <p class="meta">$DEFLOCK</p>
+  </div>
+  <span class="stamp" style="right:-14px;bottom:22px;transform:rotate(4deg)">SPOTTED</span>
+</div>
+</body></html>

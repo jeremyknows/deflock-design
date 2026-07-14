@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Share card" description="1080×1080 expressive artifact with register energy baked in: opposing tilts, stamp straddle, murmuration figure, avatar polaroid, exact disclaimer — press-check stamps the verdict" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="position:relative;width:1080px;height:1080px;overflow:hidden;background-image:radial-gradient(circle, rgba(20,16,10,.14) 1.1px, transparent 1.2px);background-size:9px 9px;background-color:#f2ede3;color:#14100a">
+<sc-if value="{{ figureReady }}" hint-placeholder-val="{{ false }}"><img src="{{ figureSrc }}" alt="" style="position:absolute;right:-70px;top:56px;width:560px;transform:rotate(2deg)"></sc-if>
+<div style="position:absolute;left:72px;top:330px;display:grid;gap:22px;justify-items:start;transform:rotate(-1.5deg)">
+<h1 style="margin:0;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:124px;line-height:.94;letter-spacing:-0.01em;text-transform:uppercase;text-shadow:.045em .03em 0 #d92b1c;max-width:700px">The flock watches back.</h1>
+<p style="margin:0;font-family:'Space Mono',monospace;font-weight:700;font-size:40px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">$DEFLOCK</p>
+</div>
+<span style="position:absolute;left:-34px;top:132px;padding:14px 26px;border:3px solid #d92b1c;box-shadow:inset 0 0 0 2px #f2ede3, inset 0 0 0 4.5px #d92b1c;transform:rotate(4deg);font-family:'Space Mono',monospace;font-weight:700;font-size:40px;letter-spacing:.12em;color:#d92b1c;text-transform:uppercase;background:#f2ede3">Spotted</span>
+<figure style="position:absolute;right:84px;bottom:170px;margin:0;padding:14px 14px 12px;border:1.5px solid #14100a;background:#fbf9f4;transform:rotate(3deg);display:grid;gap:10px;box-shadow:6px 6px 0 rgba(20,16,10,.36)">
+<span style="display:grid;place-items:center;width:210px;height:210px;background:color-mix(in srgb, #14100a 8%, #f2ede3);font-family:'Archivo Black',sans-serif;font-size:42px;text-transform:uppercase">@you</span>
+<figcaption style="font-family:'Oswald',sans-serif;font-size:24px;line-height:1.25;max-width:210px">i put my town on the map</figcaption>
+</figure>
+<p style="position:absolute;left:72px;right:72px;bottom:40px;margin:0;font-family:'Space Mono',monospace;font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase">Community-made · unaffiliated with deflock.org · not financial advice.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1080},&quot;figure&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sweep&quot;,&quot;cloud&quot;],&quot;default&quot;:&quot;sweep&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Register&quot;},&quot;pressCheck&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Register&quot;}}">
+class Component extends DCLogic {
+  runCheck() {
+    document.querySelectorAll(".press-stamp").forEach((n) => n.remove());
+    if (this.props.pressCheck === false || !window.pressCheck) return;
+    window.pressCheck({ mode: "expressive" });
+  }
+  schedule(tries) {
+    if (this.props.pressCheck === false) return;
+    if (window.pressCheck) { this.runCheck(); return; }
+    if ((tries || 0) < 80) setTimeout(() => this.schedule((tries || 0) + 1), 120);
+  }
+  componentDidMount() {
+    const go = () => setTimeout(() => this.schedule(0), 200);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(go); else go();
+  }
+  componentDidUpdate(prev) {
+    if (prev.pressCheck !== this.props.pressCheck || prev.figure !== this.props.figure) {
+      document.querySelectorAll(".press-stamp").forEach((n) => n.remove());
+      if (this.props.pressCheck !== false) setTimeout(() => this.schedule(0), 250);
+    }
+  }
+  renderVals() {
+    return { figureReady: true, figureSrc: (window.__dfBase || "../..") + "/assets/motifs/motif-" + (this.props.figure ?? "sweep") + ".svg" };
+  }
+}
+</script>
+</body>
+</html>

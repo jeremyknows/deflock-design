@@ -1,0 +1,16 @@
+<!-- @dsCard group="Texture" viewport="700x210" name="Borders, shadows, states" subtitle="1.5px hairline law · hard offsets only (no blur, ever) · hover lift · press scale(.96)" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;padding:14px;background:var(--df-color-paper);display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.b{border:var(--df-border-default);padding:10px;min-height:74px;display:grid;align-content:end;background:var(--df-surface-card)}
+.k{font-family:var(--df-font-meta);font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin:0}
+.u{font-family:var(--df-font-meta);font-size:8px;margin:2px 0 0;opacity:.7;text-transform:uppercase}</style></head>
+<body>
+<div class="b"><p class="k">Hairline 1.5px</p><p class="u">THE border · 2px = shipped drift</p></div>
+<div class="b" style="border:var(--df-border-heavy)"><p class="k">Heavy 3px</p><p class="u">feature panels · stamp weight</p></div>
+<div class="b" style="border:var(--df-border-dashed)"><p class="k">Dashed</p><p class="u">empty states</p></div>
+<div class="b" style="box-shadow:var(--df-shadow-hard-md);border:var(--df-border-heavy)"><p class="k">Hard shadow 6px</p><p class="u">raised · never blurred</p></div>
+<div class="b" style="box-shadow:var(--df-shadow-hover);transform:var(--df-hover-lift)"><p class="k">Hover</p><p class="u">lift −1,−1 + 36% ink shadow</p></div>
+<div class="b" style="transform:scale(.96)"><p class="k">Press</p><p class="u">scale(.96) · 120ms ease-out</p></div>
+<div class="b" style="outline:var(--df-focus-ring);outline-offset:2px"><p class="k">Focus</p><p class="u">2px ink ring · offset 2</p></div>
+<div class="b" style="opacity:.55"><p class="k">Disabled</p><p class="u">opacity .55 · no transforms</p></div>
+</body></html>

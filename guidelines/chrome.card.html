@@ -1,0 +1,17 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Chrome margin + breakpoints" subtitle="4.5% of short side gutters · 720px nav dock · 860px panel stack · 430px register floor" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;padding:14px;background:var(--df-color-paper);display:grid;grid-template-columns:1fr 1.2fr;gap:12px}
+.frame{border:var(--df-border-default);position:relative;min-height:140px;background:var(--df-halftone-image),var(--df-color-paper);background-size:var(--df-halftone-size),auto}
+.safe{position:absolute;inset:4.5%;border:1.5px dashed var(--df-color-red)}
+.k{font-family:var(--df-font-meta);font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin:0;position:absolute;left:8%;top:8%}
+.bp{display:grid;gap:6px;align-content:center}
+.bp div{border-top:1.5px solid var(--df-color-ink);padding:6px 0 0;font-family:var(--df-font-meta);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase}
+.bp b{font-weight:700;letter-spacing:.12em}</style></head>
+<body>
+<div class="frame"><div class="safe"></div><p class="k">chrome margin 4.5% short side</p></div>
+<div class="bp">
+<div><b>≤860px</b> — two-column panels stack (profile grid, hero)</div>
+<div><b>≤720px</b> — header centers · nav docks as fixed bottom tab bar · footer stacks</div>
+<div><b>≤430px</b> — register floor: title clamps bottom out, texture budgets unchanged, hero mark may hide (≤419px), actions go full-width (≤374px)</div>
+</div>
+</body></html>

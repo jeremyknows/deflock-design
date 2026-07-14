@@ -1,0 +1,39 @@
+<!-- @dsCard group="Register" viewport="700x400" name="Press check — executable law" subtitle="register/press-check.js audits the DOM against R1–R6 + floors and stamps the verdict" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="../register/press-check.js"></script>
+<style>body{margin:0;padding:14px;background:var(--df-color-paper);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.frame{border:var(--df-border-default);position:relative;height:300px;overflow:hidden;background:var(--df-halftone-image),var(--df-color-paper);background-size:var(--df-halftone-size),auto}
+.cap{font-family:var(--df-font-meta);font-weight:700;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin:6px 0 0;opacity:.75}
+.slam{font-family:var(--df-font-slam);font-size:30px;line-height:.94;text-transform:uppercase;margin:0;text-shadow:var(--df-misreg-shadow)}
+.tick{font-family:var(--df-font-meta);font-weight:700;font-size:12px;letter-spacing:.14em;margin:0;white-space:nowrap}
+.stampx{position:absolute;right:-16px;bottom:44px;padding:6px 12px;border:3px solid var(--df-color-red);box-shadow:var(--df-stamp-inset);transform:rotate(4deg);font-family:var(--df-font-meta);font-weight:700;font-size:19px;letter-spacing:.12em;color:var(--df-color-red);text-transform:uppercase;background:var(--df-color-paper)}
+.disc{position:absolute;left:12px;right:12px;bottom:6px;font-family:var(--df-font-meta);font-weight:700;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;margin:0}</style></head>
+<body>
+<div>
+<div class="frame" id="pass">
+  <img src="../assets/motifs/motif-sweep.svg" alt="" style="position:absolute;right:-22px;top:12px;width:150px;transform:rotate(2deg)">
+  <div style="position:absolute;inset:22px 16px 42px;display:grid;align-content:center;justify-items:start;gap:7px;transform:rotate(-1.5deg)">
+    <p class="slam">The flock<br>watches back</p>
+    <p class="tick">$DEFLOCK</p>
+  </div>
+  <span class="stampx">SPOTTED</span>
+  <p class="disc">COMMUNITY-MADE · UNAFFILIATED WITH DEFLOCK.ORG</p>
+</div>
+<p class="cap">Register energy → PASSED THE PRESS</p>
+</div>
+<div>
+<div class="frame" id="fail">
+  <div style="display:grid;height:100%;align-content:center;justify-items:center;gap:8px;text-align:center;padding:0 18px">
+    <p style="font-family:var(--df-font-label);font-weight:700;font-size:20px;text-transform:uppercase;margin:0;line-height:1.15">The cameras are everywhere — and counting</p>
+    <p style="font-family:var(--df-font-meta);font-size:11px;font-weight:700;color:var(--df-color-red);letter-spacing:.12em;text-transform:uppercase;margin:0">Join the flock today</p>
+  </div>
+</div>
+<p class="cap">Token-compliant but sterile → PULLED (hover the stamp for the rule log)</p>
+</div>
+<script>
+document.fonts.ready.then(function(){setTimeout(function(){
+  pressCheck({root:document.getElementById('pass'),mode:'expressive'});
+  pressCheck({root:document.getElementById('fail'),mode:'expressive'});
+},150);});
+</script>
+</body></html>

@@ -1,0 +1,138 @@
+{
+  "$schema": "deflock-composition-register",
+  "version": "1.0.0",
+  "authored": "2026-07-14",
+  "authority": "Upstream creative handoff §4 (design-audit finding: ingredients without register produced rejected 'sterile' work). Doctrine > tokens.json > this file for values; for COMPOSITION this file is law.",
+  "enforcement": "register/press-check.js — executable DOM audit of these rules + doctrine/legibility floors; work presented as official $DeFlock ships only on PASS (rule IDs match the checklists)",
+  "modes": {
+    "expressive": {
+      "appliesTo": ["share-card", "poster", "sticker", "x-post", "quote-card", "banner", "meme", "comic", "endcard", "pfp"],
+      "summary": "Content artifacts. The register rules below are REQUIRED — an artifact that satisfies every token but no register rule is off-brand (the proven failure class)."
+    },
+    "ui": {
+      "appliesTo": ["web-page", "web-component", "form", "table", "nav", "dashboard"],
+      "summary": "Website UI stays disciplined so the loud pieces stay loud: type straight (tilt only on stamp-class accents: badges, active nav, one accent button per view), halftone alpha at the .10 floor, grain at .05, red rationed to focus/stamp/kicker hits, misregistration on display type only."
+    }
+  },
+  "rules": [
+    {
+      "id": "R1",
+      "name": "tilt-default",
+      "statement": "Tilt is the default posture for expressive artifacts: at least 2 rotated elements with OPPOSING signs. Axis-locked compositions are off-brand.",
+      "mode": "expressive",
+      "params": {
+        "minRotatedElements": 2,
+        "signs": "opposing (one negative, one positive)",
+        "stampRangeDeg": [-4, 4],
+        "blockRangeDeg": [-2, -1.5],
+        "uiException": "UI mode: tilt lives only on stamp-class elements (badge, active nav ring, accent button), one sign per view is acceptable"
+      },
+      "tokens": ["--df-tilt-stamp-min", "--df-tilt-stamp-max", "--df-tilt-block"]
+    },
+    {
+      "id": "R2",
+      "name": "occlusion",
+      "statement": "One element must overlap the frame border or the type: sticker-slap, stamp straddling an edge, polaroid over a torn edge. Occlusion signals hand-assembly.",
+      "mode": "expressive",
+      "params": {
+        "minOverlaps": 1,
+        "sanctionedTreatments": ["stamp straddles frame border", "sticker-slap over type", "polaroid over torn edge", "figure breaks chrome rule"],
+        "never": "occlude the disclaimer wording, the ticker, or camera anatomy"
+      }
+    },
+    {
+      "id": "R3",
+      "name": "figurative-element",
+      "statement": "Every expressive artifact carries at least one figurative element: murmuration (motif-sweep/motif-cloud), breakthrough emblem, escapee birds, camera subject. Abstract decoration (swooshes, gradients) carries no meaning here.",
+      "mode": "expressive",
+      "params": {
+        "minFigures": 1,
+        "sanctionedFigures": ["assets/motifs/motif-sweep.svg", "assets/motifs/motif-cloud.svg", "assets/marks/emblem-breakthrough.svg", "assets/cameras/cam-*.svg (subject, intact)", "assets/mascot/* (identity, sole sanctioned bird)"],
+        "banned": ["abstract swooshes", "gradient blobs", "generic sparkles"]
+      }
+    },
+    {
+      "id": "R4",
+      "name": "avatar-as-hero",
+      "statement": "The human is the hero on personal artifacts: the sharer's avatar/handle runs prominent (polaroid-slap or ring-break treatment), never reduced to a glyph.",
+      "mode": "expressive",
+      "appliesTo": ["share-card", "pfp", "profile artifacts"],
+      "params": {
+        "avatarMinShare": "avatar or handle among the 2 largest elements",
+        "sanctionedTreatments": ["polaroid-slap (tilted white-border photo)", "ring-break (avatar breaks a circular frame)"],
+        "never": "avatar as favicon-scale glyph in a corner"
+      }
+    },
+    {
+      "id": "R5",
+      "name": "case-follows-speech-act",
+      "statement": "Uppercase slam is the watchdog voice (aimed at the surveilled: THEY MAP YOUR PLATES). First-person pledges run sentence case with misregistration (i put my town on the map). Both are brand-true; the speech act decides.",
+      "mode": "both",
+      "params": {
+        "watchdog": { "case": "uppercase", "class": "slam", "person": "second" },
+        "pledge": { "case": "sentence", "class": "label-body or slam", "person": "first", "texture": "misregistration allowed on display-size pledges" }
+      }
+    },
+    {
+      "id": "R6",
+      "name": "expressive-ui-split",
+      "statement": "R1-R4 are requirements for CONTENT artifacts and violations for body-level UI. A data table at -2deg is as off-brand as an axis-locked poster.",
+      "mode": "both",
+      "params": {
+        "uiTextureBudget": { "halftoneAlpha": 0.1, "grainOpacity": 0.05, "misregScope": "page-title display type only" },
+        "expressiveTextureBudget": { "halftoneAlpha": [0.1, 0.16], "grainOpacity": [0.05, 0.08], "misregScope": "display type + villain glyph" }
+      }
+    }
+  ],
+  "legibilityFloors": {
+    "slamShareOfFrame": "slam line >= 8% of frame height at feed scale",
+    "slamMinPx": 48,
+    "labelMinPx": 24,
+    "metaMinPx": 16,
+    "uiBodyMinPx": 15,
+    "uiMetaMinPx": 11.6,
+    "tapTargetMinPx": 44
+  },
+  "checklists": {
+    "share-card": [
+      "C1 doctrine: cameras intact; no invented amounts (operator-verified numbers only); disclaimer wording exact; no other URLs; no emdashes",
+      "C2 plates only: paper/ink/red (+gadsden ONLY if DONT TREAD lineage); never pure black; never red type on ink",
+      "R1 >=2 tilted elements, opposing signs",
+      "R2 >=1 occlusion (stamp straddle / sticker-slap / polaroid over torn edge)",
+      "R3 >=1 figurative element (murmuration, emblem, mascot)",
+      "R4 avatar/handle among the 2 largest elements",
+      "R5 case matches speech act (watchdog=upper, pledge=sentence+misreg)",
+      "L slam >=8% frame height; ticker unbroken on one line; meta >=16px at 1080",
+      "T texture inside budgets: halftone alpha .10-.16, grain .05-.08, misreg .045em display-only"
+    ],
+    "poster": [
+      "C1 doctrine (as share-card C1); stickers/posters carry disclaimer per footer law",
+      "C2 plates only; red <15% of frame, 1-2 hits",
+      "R1 R2 R3 required; R4 n/a unless personal",
+      "L slam floors per tokens.json.type; safe margin 4.5% short side",
+      "P print path: alpha converts to 9px-pitch dots (Print Specs §06); no CMYK, no gradients, no tints-as-fills"
+    ],
+    "sticker": [
+      "C1 doctrine; NO URL at all (operator rule), disclaimer included",
+      "C2 plates; die-cut 3in nominal, 1/16in bleed, 300 PPI",
+      "R1 R2 R3 required",
+      "L type floors at print scale; ticker never broken"
+    ],
+    "x-post": [
+      "C1 doctrine; quotes verbatim + sourced",
+      "C2 plates; LOUD MODE red flood only via X Templates §10, itself rationed",
+      "R1 R2 R3 required; R4 when the post is personal",
+      "L slam >=8% frame height at feed scale; endcard holds >=1.5s on video"
+    ],
+    "ui-screen": [
+      "C1 doctrine: real data only (fixtures are frozen real data); disclaimer footer present; ticker one line",
+      "C2 plates via semantic tokens only — no raw hexes in component CSS",
+      "R6 discipline: no tilt outside stamp-class elements; texture at UI budget; misreg on page-title display type only",
+      "A focus-visible ring on every interactive element; tap targets >=44px; prefers-reduced-motion collapses transitions to CUT",
+      "K contrast: ink/paper 16.2:1 anywhere; red type is large-text-only (4.2:1) => >=24px or >=18.66px bold, else ink type + red non-text accent; paper on red same floor; NEVER red type on ink (plate law; 3.9:1); gadsden carries ink text only (paper on gadsden 1.6:1 banned)",
+      "H states: hover = hard-shadow lift (translate -1px,-1px + --df-shadow-hover); press = scale(0.96) 120ms ease-out; disabled = opacity .55 + cursor"
+    ]
+  },
+  "voiceRef": "tokens.json voice + footer + ticker (declarative watchdog; puns are seasoning; · or periods; sanctioned sounds only)",
+  "misregDirection": "red offsets DOWN-RIGHT (.045em .03em) per tokens.json. The share-card route's up-left offset is recorded drift, not precedent."
+}

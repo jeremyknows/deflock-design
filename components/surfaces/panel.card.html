@@ -1,0 +1,20 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Panel" subtitle="Card surfaces: default, raised, red stamp, gadsden accent, empty" -->
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:20px;background:var(--df-color-paper)}h3{margin:0 0 6px;font-family:var(--df-font-label);font-weight:700;font-size:15px;text-transform:uppercase}p{margin:0;font-family:var(--df-font-label);font-size:13px;line-height:1.25}.lbl{font-family:var(--df-font-meta);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+function Demo(){const { Panel } = window.DeFlockDesign_d58f76;return <div style={{display:'grid',gridTemplateColumns:'repeat(3,minmax(0,1fr))',gap:16,alignItems:'start'}}>
+  <Panel pad={2}><h3>Card</h3><p>1.5px ink hairline, warm paper fill. The default boxed region.</p></Panel>
+  <Panel variant="raised" pad={2}><h3>Raised</h3><p>3px border + hard offset shadow + halftone. Feature panels only.</p></Panel>
+  <Panel variant="stamp" pad={2}><h3>Stamp</h3><p>Red hairline + stamp inset rings. The verify panel. One per view.</p></Panel>
+  <Panel variant="accent" pad={2}><h3>Accent</h3><p>Gadsden 14% wash + halftone. Result and warning grounds.</p></Panel>
+  <Panel surface="wash-ink" halftone pad={2}><h3>Ink wash</h3><p>Ink 8% wash. Grounding strips like the real-project band.</p></Panel>
+  <Panel variant="empty" pad={2} style={{display:'grid',placeItems:'center',minHeight:96}}><span className="lbl">No assets in this set yet.</span></Panel>
+</div>;}
+let dfT=0;(function dfMount(){if(window.DeFlockDesign_d58f76){ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);}else if(dfT++<125){setTimeout(dfMount,80);}else{document.getElementById('root').textContent='design-system bundle failed to load · reload';}})();
+</script></body></html>

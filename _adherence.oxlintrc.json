@@ -1,0 +1,483 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/actions/**",
+              "components/data/**",
+              "components/feedback/**",
+              "components/forms/**",
+              "components/navigation/**",
+              "components/overlay/**",
+              "components/surfaces/**",
+              "register/**",
+              "scripts/**",
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Archivo Black|Oswald|Space Mono))/i]",
+        "message": "Font not provided by the design system. Available: Archivo Black, Oswald, Space Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|tilt|selected|style|children|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: variant, tilt, selected, style, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:stamp|kicker|solid|accent|chip)$/]",
+        "message": "<Badge> variant must be one of 'stamp' | 'kicker' | 'solid' | 'accent' | 'chip'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|size|font|tilt|iconOnly|disabled|href|target|onClick|type|style|children|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, size, font, tilt, iconOnly, disabled, href, target, onClick, type, style, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|accent|quiet)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'accent' | 'quiet'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg|xl)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg' | 'xl'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='font'] > Literal[value!=/^(?:meta|label)$/]",
+        "message": "<Button> font must be one of 'meta' | 'label'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='type'] > Literal[value!=/^(?:button|submit)$/]",
+        "message": "<Button> type must be one of 'button' | 'submit'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='FooterStrip'] > JSXAttribute > JSXIdentifier[name!=/^(?:contactEmail|extra|style|key|ref|className|style|children)$/]",
+        "message": "<FooterStrip> doesn't accept that prop. Declared props: contactEmail, extra, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='FormRow'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|htmlFor|error|hint|children|style|key|ref|className|style|children)$/]",
+        "message": "<FormRow> doesn't accept that prop. Declared props: label, htmlFor, error, hint, children, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Input'] > JSXAttribute > JSXIdentifier[name!=/^(?:size|invalid|placeholder|value|onChange|id|type|inputMode|maxLength|style|key|ref|className|style|children)$/]",
+        "message": "<Input> doesn't accept that prop. Declared props: size, invalid, placeholder, value, onChange, id, type, inputMode, maxLength, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Input'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:lg|xl)$/]",
+        "message": "<Input> size must be one of 'lg' | 'xl'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Metric'] > JSXAttribute > JSXIdentifier[name!=/^(?:eyebrow|label|value|sub|wash|nudge|style|key|ref|className|style|children)$/]",
+        "message": "<Metric> doesn't accept that prop. Declared props: eyebrow, label, value, sub, wash, nudge, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Metric'] > JSXAttribute[name.name='wash'] > Literal[value!=/^(?:none|accent|red)$/]",
+        "message": "<Metric> wash must be one of 'none' | 'accent' | 'red'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Panel'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|surface|halftone|raised|pad|as|style|children|key|ref|className|style|children)$/]",
+        "message": "<Panel> doesn't accept that prop. Declared props: variant, surface, halftone, raised, pad, as, style, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Panel'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:card|raised|stamp|accent|empty)$/]",
+        "message": "<Panel> variant must be one of 'card' | 'raised' | 'stamp' | 'accent' | 'empty'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Panel'] > JSXAttribute[name.name='surface'] > Literal[value!=/^(?:card|quiet|bright|wash-ink|accent|accent-strong|paper)$/]",
+        "message": "<Panel> surface must be one of 'card' | 'quiet' | 'bright' | 'wash-ink' | 'accent' | 'accent-strong' | 'paper'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Sheet'] > JSXAttribute > JSXIdentifier[name!=/^(?:open|onClose|title|width|children|style|key|ref|className|style|children)$/]",
+        "message": "<Sheet> doesn't accept that prop. Declared props: open, onClose, title, width, children, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SiteHeader'] > JSXAttribute > JSXIdentifier[name!=/^(?:tabs|activeHref|onNavigate|homeHref|style|key|ref|className|style|children)$/]",
+        "message": "<SiteHeader> doesn't accept that prop. Declared props: tabs, activeHref, onNavigate, homeHref, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StatRow'] > JSXAttribute > JSXIdentifier[name!=/^(?:date|title|note|valueLabel|value|href|linkLabel|style|key|ref|className|style|children)$/]",
+        "message": "<StatRow> doesn't accept that prop. Declared props: date, title, note, valueLabel, value, href, linkLabel, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Toast'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|fixed|icon|role|style|children|key|ref|className|style|children)$/]",
+        "message": "<Toast> doesn't accept that prop. Declared props: variant, fixed, icon, role, style, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Toast'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:warning|alert|neutral)$/]",
+        "message": "<Toast> variant must be one of 'warning' | 'alert' | 'neutral'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "FooterStrip": {
+        "replaces": []
+      },
+      "FormRow": {
+        "replaces": []
+      },
+      "Input": {
+        "replaces": []
+      },
+      "Metric": {
+        "replaces": []
+      },
+      "Panel": {
+        "replaces": []
+      },
+      "Sheet": {
+        "replaces": []
+      },
+      "SiteHeader": {
+        "replaces": []
+      },
+      "StatRow": {
+        "replaces": []
+      },
+      "Toast": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--df-avatar-size",
+      "--df-badge-border",
+      "--df-badge-font",
+      "--df-badge-size",
+      "--df-badge-tilt",
+      "--df-border-accent",
+      "--df-border-dashed",
+      "--df-border-default",
+      "--df-border-heavy",
+      "--df-bp-panel",
+      "--df-bp-site",
+      "--df-bp-tight",
+      "--df-btn-accent-bg",
+      "--df-btn-accent-fg",
+      "--df-btn-accent-shadow",
+      "--df-btn-accent-tilt",
+      "--df-btn-border",
+      "--df-btn-disabled-opacity",
+      "--df-btn-font",
+      "--df-btn-primary-bg",
+      "--df-btn-primary-fg",
+      "--df-btn-quiet-bg",
+      "--df-btn-radius",
+      "--df-btn-secondary-bg",
+      "--df-btn-secondary-fg",
+      "--df-btn-size",
+      "--df-btn-tracking",
+      "--df-btn-weight",
+      "--df-chrome-margin",
+      "--df-color-gadsden",
+      "--df-color-ink",
+      "--df-color-paper",
+      "--df-color-red",
+      "--df-control-h-lg",
+      "--df-control-h-md",
+      "--df-control-h-sm",
+      "--df-control-h-xl",
+      "--df-dur-press",
+      "--df-dur-press-max",
+      "--df-dur-reward",
+      "--df-dur-ui",
+      "--df-ease-plate",
+      "--df-ease-press",
+      "--df-ease-reward",
+      "--df-focus-offset",
+      "--df-focus-ring",
+      "--df-focus-ring-inverse",
+      "--df-font-display",
+      "--df-font-label",
+      "--df-font-meta",
+      "--df-font-slam",
+      "--df-footer-font",
+      "--df-footer-ticker-font",
+      "--df-grain-opacity",
+      "--df-grain-opacity-max",
+      "--df-halftone-image",
+      "--df-halftone-red",
+      "--df-halftone-size",
+      "--df-hover-lift",
+      "--df-input-bg",
+      "--df-input-border",
+      "--df-input-font",
+      "--df-input-h",
+      "--df-layout-chrome-margin",
+      "--df-leading-body",
+      "--df-leading-slam",
+      "--df-leading-slam-max",
+      "--df-misreg-peak",
+      "--df-misreg-shadow",
+      "--df-nav-active-bg",
+      "--df-nav-active-ring",
+      "--df-nav-h",
+      "--df-panel-bg",
+      "--df-panel-border",
+      "--df-panel-pad",
+      "--df-panel-raised-border",
+      "--df-panel-raised-shadow",
+      "--df-panel-stamp-border",
+      "--df-panel-stamp-shadow",
+      "--df-press-scale",
+      "--df-press-scale-icon",
+      "--df-radius-avatar",
+      "--df-radius-none",
+      "--df-shadow-hard-md",
+      "--df-shadow-hard-sm",
+      "--df-shadow-hover",
+      "--df-sheet-pad",
+      "--df-sheet-w",
+      "--df-size-label-body",
+      "--df-size-meta",
+      "--df-size-meta-lg",
+      "--df-size-meta-sm",
+      "--df-size-title-hero",
+      "--df-size-title-page",
+      "--df-space-base-unit",
+      "--df-space-unit",
+      "--df-stamp-inset",
+      "--df-stamp-inset-ink",
+      "--df-stat-label-font",
+      "--df-stat-row-border",
+      "--df-stat-value-font",
+      "--df-stroke-hairline",
+      "--df-stroke-heavy",
+      "--df-surface-backdrop",
+      "--df-surface-card",
+      "--df-surface-card-bright",
+      "--df-surface-card-quiet",
+      "--df-surface-inverse",
+      "--df-surface-page",
+      "--df-surface-wash-accent",
+      "--df-surface-wash-accent-strong",
+      "--df-surface-wash-ink",
+      "--df-surface-wash-red",
+      "--df-text-accent",
+      "--df-text-inverse",
+      "--df-text-muted",
+      "--df-text-primary",
+      "--df-texture-halftone-image",
+      "--df-texture-halftone-size",
+      "--df-texture-misregistration-shadow",
+      "--df-texture-reg-mark-stroke",
+      "--df-texture-stamp-rotate-max",
+      "--df-texture-stamp-rotate-min",
+      "--df-texture-stamp-shadow",
+      "--df-tilt-block",
+      "--df-tilt-stamp-max",
+      "--df-tilt-stamp-min",
+      "--df-toast-bg",
+      "--df-toast-border",
+      "--df-tracking-label",
+      "--df-tracking-meta",
+      "--df-tracking-meta-wide",
+      "--df-tracking-slam",
+      "--df-type-label-family",
+      "--df-type-meta-family",
+      "--df-type-slam",
+      "--df-type-slam-family",
+      "--df-weight-label",
+      "--df-weight-label-body",
+      "--df-weight-label-strong",
+      "--df-weight-meta",
+      "--df-weight-meta-strong",
+      "--df-z-grain",
+      "--df-z-header",
+      "--df-z-nav-mobile",
+      "--df-z-sheet"
+    ],
+    "tokenKinds": {
+      "--df-color-paper": "color",
+      "--df-color-ink": "color",
+      "--df-color-red": "color",
+      "--df-color-gadsden": "color",
+      "--df-font-slam": "font",
+      "--df-font-label": "font",
+      "--df-font-meta": "font",
+      "--df-weight-label-body": "font",
+      "--df-weight-label": "font",
+      "--df-weight-label-strong": "font",
+      "--df-weight-meta": "font",
+      "--df-weight-meta-strong": "font",
+      "--df-tracking-slam": "font",
+      "--df-tracking-label": "font",
+      "--df-tracking-meta": "font",
+      "--df-tracking-meta-wide": "font",
+      "--df-leading-slam": "font",
+      "--df-leading-slam-max": "font",
+      "--df-space-unit": "spacing",
+      "--df-chrome-margin": "spacing",
+      "--df-stroke-hairline": "other",
+      "--df-stroke-heavy": "other",
+      "--df-radius-none": "radius",
+      "--df-radius-avatar": "radius",
+      "--df-halftone-image": "other",
+      "--df-halftone-size": "other",
+      "--df-halftone-red": "other",
+      "--df-grain-opacity": "other",
+      "--df-grain-opacity-max": "other",
+      "--df-misreg-shadow": "shadow",
+      "--df-misreg-peak": "other",
+      "--df-stamp-inset": "spacing",
+      "--df-stamp-inset-ink": "spacing",
+      "--df-tilt-stamp-min": "other",
+      "--df-tilt-stamp-max": "other",
+      "--df-tilt-block": "other",
+      "--df-ease-press": "other",
+      "--df-ease-reward": "other",
+      "--df-ease-plate": "other",
+      "--df-dur-press": "other",
+      "--df-dur-press-max": "other",
+      "--df-dur-reward": "other",
+      "--df-dur-ui": "other",
+      "--df-surface-page": "color",
+      "--df-surface-card": "color",
+      "--df-surface-card-quiet": "color",
+      "--df-surface-card-bright": "color",
+      "--df-surface-inverse": "color",
+      "--df-surface-wash-ink": "color",
+      "--df-surface-wash-accent": "color",
+      "--df-surface-wash-accent-strong": "color",
+      "--df-surface-wash-red": "color",
+      "--df-surface-backdrop": "color",
+      "--df-text-primary": "font",
+      "--df-text-inverse": "font",
+      "--df-text-accent": "font",
+      "--df-text-muted": "font",
+      "--df-border-default": "color",
+      "--df-border-heavy": "color",
+      "--df-border-accent": "color",
+      "--df-border-dashed": "color",
+      "--df-focus-ring": "color",
+      "--df-focus-ring-inverse": "color",
+      "--df-focus-offset": "spacing",
+      "--df-shadow-hard-sm": "shadow",
+      "--df-shadow-hard-md": "shadow",
+      "--df-shadow-hover": "shadow",
+      "--df-press-scale": "other",
+      "--df-press-scale-icon": "other",
+      "--df-hover-lift": "other",
+      "--df-control-h-sm": "color",
+      "--df-control-h-md": "color",
+      "--df-control-h-lg": "color",
+      "--df-control-h-xl": "color",
+      "--df-type-slam": "font",
+      "--df-size-title-page": "spacing",
+      "--df-size-title-hero": "spacing",
+      "--df-size-meta-sm": "spacing",
+      "--df-size-meta": "spacing",
+      "--df-size-meta-lg": "spacing",
+      "--df-size-label-body": "spacing",
+      "--df-leading-body": "font",
+      "--df-z-header": "other",
+      "--df-z-grain": "other",
+      "--df-z-nav-mobile": "other",
+      "--df-z-sheet": "other",
+      "--df-bp-site": "other",
+      "--df-bp-panel": "other",
+      "--df-bp-tight": "other",
+      "--df-btn-border": "color",
+      "--df-btn-radius": "radius",
+      "--df-btn-font": "font",
+      "--df-btn-weight": "font",
+      "--df-btn-tracking": "font",
+      "--df-btn-size": "other",
+      "--df-btn-primary-bg": "other",
+      "--df-btn-primary-fg": "other",
+      "--df-btn-secondary-bg": "other",
+      "--df-btn-secondary-fg": "other",
+      "--df-btn-accent-bg": "other",
+      "--df-btn-accent-fg": "other",
+      "--df-btn-accent-shadow": "shadow",
+      "--df-btn-accent-tilt": "other",
+      "--df-btn-quiet-bg": "other",
+      "--df-btn-disabled-opacity": "other",
+      "--df-input-border": "color",
+      "--df-input-bg": "other",
+      "--df-input-h": "other",
+      "--df-input-font": "font",
+      "--df-panel-border": "color",
+      "--df-panel-bg": "other",
+      "--df-panel-pad": "spacing",
+      "--df-panel-raised-border": "color",
+      "--df-panel-raised-shadow": "shadow",
+      "--df-panel-stamp-border": "color",
+      "--df-panel-stamp-shadow": "shadow",
+      "--df-badge-border": "color",
+      "--df-badge-font": "font",
+      "--df-badge-size": "other",
+      "--df-badge-tilt": "other",
+      "--df-nav-h": "other",
+      "--df-nav-active-ring": "other",
+      "--df-nav-active-bg": "other",
+      "--df-footer-font": "font",
+      "--df-footer-ticker-font": "font",
+      "--df-sheet-w": "color",
+      "--df-sheet-pad": "spacing",
+      "--df-stat-row-border": "color",
+      "--df-stat-value-font": "font",
+      "--df-stat-label-font": "font",
+      "--df-toast-border": "color",
+      "--df-toast-bg": "other",
+      "--df-avatar-size": "spacing",
+      "--df-texture-halftone-image": "other",
+      "--df-texture-halftone-size": "other",
+      "--df-texture-reg-mark-stroke": "other",
+      "--df-texture-misregistration-shadow": "shadow",
+      "--df-texture-stamp-shadow": "shadow",
+      "--df-texture-stamp-rotate-min": "other",
+      "--df-texture-stamp-rotate-max": "other",
+      "--df-space-base-unit": "spacing",
+      "--df-layout-chrome-margin": "spacing",
+      "--df-type-slam-family": "font",
+      "--df-type-label-family": "font",
+      "--df-type-meta-family": "font",
+      "--df-font-display": "font"
+    },
+    "fontFamilies": [
+      "Archivo Black",
+      "Oswald",
+      "Space Mono"
+    ]
+  }
+}

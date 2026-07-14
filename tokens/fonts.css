@@ -1,0 +1,13 @@
+/* DeFlock Design — webfonts (the three locked families, tokens.json.type)
+   Provided binaries: Archivo Black 400 · Oswald 500,700 · Space Mono 400,700.
+   Oswald 400 (body) + 600 (stamp alt) come from the upstream variable font
+   (google/fonts ofl/oswald, OFL — license at ../assets/fonts/OFL-oswald.txt);
+   the locked statics keep 500/700. font-synthesis is disabled globally so the
+   library drift (fake 800/900) cannot recur. Italics never (tokens.json.type.italics). */
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;src:url('../assets/fonts/archivo-black-400.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:400;src:url('../assets/fonts/oswald-variable.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:500;src:url('../assets/fonts/oswald-500.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:600;src:url('../assets/fonts/oswald-variable.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:700;src:url('../assets/fonts/oswald-700.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Space Mono';font-style:normal;font-weight:400;src:url('../assets/fonts/space-mono-400.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Space Mono';font-style:normal;font-weight:700;src:url('../assets/fonts/space-mono-700.ttf') format('truetype');font-display:swap}

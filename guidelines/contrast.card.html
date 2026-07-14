@@ -1,0 +1,17 @@
+<!-- @dsCard group="Colors" viewport="700x200" name="Contrast floors" subtitle="Per-plate pairings: what carries text, what is UI-only, what is banned" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;padding:14px;background:var(--df-color-paper)}
+table{width:100%;border-collapse:collapse;font-family:var(--df-font-meta);font-size:10px;letter-spacing:.05em}
+td,th{border:1px solid var(--df-color-ink);padding:6px 8px;text-align:left;text-transform:uppercase}
+th{font-weight:700;letter-spacing:.12em;background:var(--df-surface-wash-ink)}
+.chip{display:inline-block;padding:1px 6px;font-weight:700}</style></head>
+<body>
+<table>
+<tr><th>Pairing</th><th>Ratio</th><th>Verdict</th></tr>
+<tr><td><span class="chip" style="background:var(--df-color-paper);border:1px solid var(--df-color-ink)">ink on paper</span></td><td>16.2:1</td><td>Any size, any weight</td></tr>
+<tr><td><span class="chip" style="background:var(--df-color-paper);color:var(--df-color-red);border:1px solid var(--df-color-red)">red on paper</span></td><td>4.2:1</td><td>FAILS normal-text AA · large only: ≥24px or ≥18.66px bold · non-text UI fine</td></tr>
+<tr><td><span class="chip" style="background:var(--df-color-red);color:var(--df-color-paper)">paper on red</span></td><td>4.2:1</td><td>Same floor · slam sizes pass</td></tr>
+<tr><td><span class="chip" style="background:var(--df-color-gadsden)">ink on gadsden</span></td><td>10.1:1</td><td>Any size · gadsden NEVER carries paper text (1.6:1)</td></tr>
+<tr><td><span class="chip" style="background:var(--df-color-ink);color:var(--df-color-red)">red on ink</span></td><td>3.9:1</td><td style="color:var(--df-color-red);font-weight:700">BANNED — plate law, not just contrast</td></tr>
+</table>
+</body></html>

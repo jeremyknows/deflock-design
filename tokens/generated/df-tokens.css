@@ -1,0 +1,156 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Compiled by scripts/generate-tokens.mjs from tokens/tokens.json (locked machine
+ * truth, 2026-07-11) + tokens/web-tokens.source.json (three-tier web definitions).
+ * Generated: 2026-07-14. Edit the sources and re-run. */
+:root {
+  /* TIER 1 — PRIMITIVES (plates, type, texture recipes, physical values) */
+  --df-color-paper: #f2ede3;
+  --df-color-ink: #14100a;
+  --df-color-red: #d92b1c;
+  --df-color-gadsden: #e8b63a;
+  --df-font-slam: 'Archivo Black', sans-serif;
+  --df-font-label: 'Oswald', sans-serif;
+  --df-font-meta: 'Space Mono', monospace;
+  --df-weight-label-body: 400;
+  --df-weight-label: 500;
+  --df-weight-label-strong: 700;
+  --df-weight-meta: 400;
+  --df-weight-meta-strong: 700;
+  --df-tracking-slam: -0.01em;
+  --df-tracking-label: 0.08em;
+  --df-tracking-meta: 0.12em;
+  --df-tracking-meta-wide: 0.18em;
+  --df-leading-slam: 0.92;
+  --df-leading-slam-max: 0.98;
+  --df-space-unit: 8px;
+  --df-chrome-margin: 4.5% of frame short side;
+  --df-stroke-hairline: 1.5px; /* @kind other */
+  --df-stroke-heavy: 3px; /* @kind other */
+  --df-radius-none: 0;
+  --df-radius-avatar: 999px;
+  --df-halftone-image: radial-gradient(circle, rgba(20,16,10,.14) 1.1px, transparent 1.2px); /* @kind other */
+  --df-halftone-size: 9px 9px; /* @kind other */
+  --df-halftone-red: rgba(217,43,28,.16); /* @kind other */
+  --df-grain-opacity: 0.05; /* @kind other */
+  --df-grain-opacity-max: 0.08; /* @kind other */
+  --df-misreg-shadow: .045em .03em 0 #d92b1c;
+  --df-misreg-peak: .075em; /* @kind other */
+  --df-stamp-inset: inset 0 0 0 2px #f2ede3, inset 0 0 0 4.5px #d92b1c;
+  --df-stamp-inset-ink: inset 0 0 0 1.5px #f2ede3, inset 0 0 0 4px #14100a;
+  --df-tilt-stamp-min: -4deg; /* @kind other */
+  --df-tilt-stamp-max: 4deg; /* @kind other */
+  --df-tilt-block: -1.5deg; /* @kind other */
+  --df-ease-press: cubic-bezier(0.6, 0, 0.9, 1); /* @kind other */
+  --df-ease-reward: cubic-bezier(0.34, 1.56, 0.64, 1); /* @kind other */
+  --df-ease-plate: linear; /* @kind other */
+  --df-dur-press: 150ms; /* @kind other */
+  --df-dur-press-max: 300ms; /* @kind other */
+  --df-dur-reward: 400ms; /* @kind other */
+  --df-dur-ui: 120ms; /* @kind other */
+  /* TIER 2 — SEMANTIC (surfaces, text, borders, interaction, scale) */
+  --df-surface-page: var(--df-color-paper);
+  --df-surface-card: color-mix(in srgb, var(--df-color-paper) 92%, white);
+  --df-surface-card-quiet: color-mix(in srgb, var(--df-color-paper) 94%, white);
+  --df-surface-card-bright: color-mix(in srgb, var(--df-color-paper) 86%, white);
+  --df-surface-inverse: var(--df-color-ink);
+  --df-surface-wash-ink: color-mix(in srgb, var(--df-color-ink) 8%, var(--df-color-paper));
+  --df-surface-wash-accent: color-mix(in srgb, var(--df-color-gadsden) 14%, var(--df-color-paper));
+  --df-surface-wash-accent-strong: color-mix(in srgb, var(--df-color-gadsden) 18%, var(--df-color-paper));
+  --df-surface-wash-red: color-mix(in srgb, var(--df-color-red) 10%, var(--df-color-paper));
+  --df-surface-backdrop: color-mix(in srgb, var(--df-color-ink) 48%, transparent);
+  --df-text-primary: var(--df-color-ink);
+  --df-text-inverse: var(--df-color-paper);
+  --df-text-accent: var(--df-color-red);
+  --df-text-muted: color-mix(in srgb, var(--df-color-ink) 72%, var(--df-color-paper));
+  --df-border-default: var(--df-stroke-hairline) solid var(--df-color-ink);
+  --df-border-heavy: var(--df-stroke-heavy) solid var(--df-color-ink);
+  --df-border-accent: var(--df-stroke-hairline) solid var(--df-color-red);
+  --df-border-dashed: var(--df-stroke-hairline) dashed var(--df-color-ink);
+  --df-focus-ring: 2px solid var(--df-color-ink);
+  --df-focus-ring-inverse: 2px solid var(--df-color-paper);
+  --df-focus-offset: 2px;
+  --df-shadow-hard-sm: calc(var(--df-space-unit) * 0.35) calc(var(--df-space-unit) * 0.35) 0 var(--df-color-ink);
+  --df-shadow-hard-md: calc(var(--df-space-unit) * 0.75) calc(var(--df-space-unit) * 0.75) 0 var(--df-color-ink);
+  --df-shadow-hover: calc(var(--df-space-unit) * 0.3) calc(var(--df-space-unit) * 0.3) 0 color-mix(in srgb, var(--df-color-ink) 36%, transparent);
+  --df-press-scale: 0.96; /* @kind other */
+  --df-press-scale-icon: 0.92; /* @kind other */
+  --df-hover-lift: translate(-1px, -1px); /* @kind other */
+  --df-control-h-sm: calc(var(--df-space-unit) * 5);
+  --df-control-h-md: calc(var(--df-space-unit) * 5.5);
+  --df-control-h-lg: calc(var(--df-space-unit) * 6);
+  --df-control-h-xl: calc(var(--df-space-unit) * 7);
+  --df-type-slam: 400 1em/var(--df-leading-slam) var(--df-font-slam);
+  --df-size-title-page: clamp(1.75rem, 4vw, 3rem);
+  --df-size-title-hero: clamp(calc(var(--df-space-unit) * 5.8), 12vw, calc(var(--df-space-unit) * 13.5));
+  --df-size-meta-sm: calc(var(--df-space-unit) * 1.45);
+  --df-size-meta: calc(var(--df-space-unit) * 1.5);
+  --df-size-meta-lg: 16px;
+  --df-size-label-body: clamp(calc(var(--df-space-unit) * 1.9), 1.55vw, calc(var(--df-space-unit) * 2.4));
+  --df-leading-body: 1.25;
+  --df-z-header: 10; /* @kind other */
+  --df-z-grain: 20; /* @kind other */
+  --df-z-nav-mobile: 30; /* @kind other */
+  --df-z-sheet: 40; /* @kind other */
+  --df-bp-site: 720px; /* @kind other */
+  --df-bp-panel: 860px; /* @kind other */
+  --df-bp-tight: 430px; /* @kind other */
+  /* TIER 3 — COMPONENT (per-component contract) */
+  --df-btn-border: var(--df-border-default);
+  --df-btn-radius: var(--df-radius-none);
+  --df-btn-font: var(--df-font-meta);
+  --df-btn-weight: var(--df-weight-meta-strong);
+  --df-btn-tracking: var(--df-tracking-meta);
+  --df-btn-size: var(--df-size-meta); /* @kind other */
+  --df-btn-primary-bg: var(--df-surface-inverse); /* @kind other */
+  --df-btn-primary-fg: var(--df-text-inverse); /* @kind other */
+  --df-btn-secondary-bg: var(--df-color-paper); /* @kind other */
+  --df-btn-secondary-fg: var(--df-text-primary); /* @kind other */
+  --df-btn-accent-bg: var(--df-color-gadsden); /* @kind other */
+  --df-btn-accent-fg: var(--df-text-primary); /* @kind other */
+  --df-btn-accent-shadow: var(--df-shadow-hard-sm);
+  --df-btn-accent-tilt: var(--df-tilt-block); /* @kind other */
+  --df-btn-quiet-bg: var(--df-surface-wash-ink); /* @kind other */
+  --df-btn-disabled-opacity: 0.55; /* @kind other */
+  --df-input-border: var(--df-border-default);
+  --df-input-bg: var(--df-color-paper); /* @kind other */
+  --df-input-h: var(--df-control-h-lg); /* @kind other */
+  --df-input-font: var(--df-font-label);
+  --df-panel-border: var(--df-border-default);
+  --df-panel-bg: var(--df-surface-card); /* @kind other */
+  --df-panel-pad: calc(var(--df-space-unit) * 3);
+  --df-panel-raised-border: var(--df-border-heavy);
+  --df-panel-raised-shadow: var(--df-shadow-hard-md);
+  --df-panel-stamp-border: var(--df-border-accent);
+  --df-panel-stamp-shadow: var(--df-stamp-inset);
+  --df-badge-border: var(--df-border-default);
+  --df-badge-font: var(--df-font-meta);
+  --df-badge-size: var(--df-size-meta-sm); /* @kind other */
+  --df-badge-tilt: var(--df-tilt-stamp-min); /* @kind other */
+  --df-nav-h: var(--df-control-h-md); /* @kind other */
+  --df-nav-active-ring: var(--df-stamp-inset-ink); /* @kind other */
+  --df-nav-active-bg: color-mix(in srgb, var(--df-color-ink) 8%, transparent); /* @kind other */
+  --df-footer-font: var(--df-font-meta);
+  --df-footer-ticker-font: var(--df-font-meta);
+  --df-sheet-w: calc(var(--df-space-unit) * 80);
+  --df-sheet-pad: calc(var(--df-space-unit) * 3);
+  --df-stat-row-border: var(--df-border-default);
+  --df-stat-value-font: var(--df-font-slam);
+  --df-stat-label-font: var(--df-font-meta);
+  --df-toast-border: var(--df-border-default);
+  --df-toast-bg: var(--df-surface-wash-accent); /* @kind other */
+  --df-avatar-size: calc(var(--df-space-unit) * 9);
+  /* LEGACY COMPAT — names consumed by shipped src/ CSS; migrate then delete (docs/migration-map.md) */
+  --df-texture-halftone-image: var(--df-halftone-image); /* @kind other */
+  --df-texture-halftone-size: var(--df-halftone-size); /* @kind other */
+  --df-texture-reg-mark-stroke: var(--df-stroke-hairline); /* @kind other */
+  --df-texture-misregistration-shadow: var(--df-misreg-shadow);
+  --df-texture-stamp-shadow: var(--df-stamp-inset);
+  --df-texture-stamp-rotate-min: var(--df-tilt-stamp-min); /* @kind other */
+  --df-texture-stamp-rotate-max: var(--df-tilt-stamp-max); /* @kind other */
+  --df-space-base-unit: var(--df-space-unit);
+  --df-layout-chrome-margin: var(--df-chrome-margin);
+  --df-type-slam-family: var(--df-font-slam);
+  --df-type-label-family: var(--df-font-label);
+  --df-type-meta-family: var(--df-font-meta);
+  --df-font-display: var(--df-font-slam);
+}

@@ -1,0 +1,22 @@
+/* DeFlock Design — global element baseline (web UI mode).
+   Consumes generated tokens only. UI mode is DISCIPLINED: texture budgets low,
+   type straight — the loud pieces (posters/stickers/social) stay loud. */
+*{box-sizing:border-box}
+html{background:var(--df-surface-page);color:var(--df-text-primary);-webkit-font-smoothing:antialiased}
+body{margin:0;min-width:0;background:var(--df-surface-page);color:var(--df-text-primary);font-family:var(--df-font-label);font-weight:var(--df-weight-label-body);font-synthesis:none;text-rendering:optimizeLegibility}
+h1,h2,h3{text-wrap:balance}
+p,li,dd,dt{text-wrap:pretty}
+em,i{font-style:normal}/* italics never (tokens.json type.italics) */
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration-line:underline;text-decoration-color:var(--df-color-ink);text-decoration-thickness:var(--df-stroke-hairline);text-underline-offset:calc(var(--df-space-unit) * 0.45)}
+::selection{background:var(--df-color-ink);color:var(--df-color-paper)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:var(--df-focus-ring);outline-offset:var(--df-focus-offset)}
+.df-tabular{font-variant-numeric:tabular-nums}
+/* Accessibility floor: every motion token has a reduced-motion fallback.
+   Riso motion is already cuts-not-tweens; reduce collapses the rest to CUT. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+@media (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+}
