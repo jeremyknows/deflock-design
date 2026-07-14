@@ -54,13 +54,22 @@ stamps the verdict (tilted riso stamp, top-right: PASSED THE PRESS / PULLED · <
 plus a per-rule console table. Zero dependencies.
 
 ```html
-<script src="../register/press-check.js" data-press-auto data-press-mode="expressive"></script>
+<script src="../register/press-check.js" data-press-auto data-press-mode="expressive" data-press-set="marked"></script>
 <!-- or programmatic, e.g. per-frame: -->
-<script>pressCheck({ root: document.getElementById('poster'), mode: 'expressive' });</script>
+<script>pressCheck({ root: document.getElementById('poster'), mode: 'expressive', set: 'marked' });</script>
 ```
 
 Checked mechanically: R1 opposing tilts · R2 frame-edge occlusion · R3 sanctioned figure
 · R6 straight containers (ui) · C2 plates-only computed colors · C1 disclaimer wording,
-unbroken $DEFLOCK ticker, prose emdashes · K red type at large-text floor · L slam ≥8%
-of frame · T red flood ≤15% · A tap targets, reduced-motion, focus-visible (ui).
-A PASS is necessary, not sufficient — the operator still rules on register energy.
+unbroken $DEFLOCK ticker, prose emdashes (marked set) or artwork-only furniture check
+(clean set — doctrine 2) · K red type at large-text floor · L slam ≥8% of frame · T red
+flood ≤15% · A tap targets, reduced-motion, focus-visible (ui).
+A PASS is necessary, not sufficient — the maintainers still rule on register energy.
+
+## Receipts — proof a piece passed
+
+A PASS can mint a **press receipt**: `await pressReceipt({ mode, set })` returns a
+tamper-evident record (rule table + artifact DOM hash, self-verifying id) that anyone
+can check with `register/verify-receipt.html` (full re-run + binding) or
+`node scripts/verify-receipt.mjs` (integrity, CI-friendly). Receipts mint only on PASS.
+Official-channel submissions should carry one. Full spec + threat model: `RECEIPTS.md`.

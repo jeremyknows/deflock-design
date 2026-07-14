@@ -1,0 +1,61 @@
+{
+ "id": "DF-21902edf0bda051a",
+ "payload": {
+  "spec": "df-press-receipt/1",
+  "checker": "press-check/1.1.0",
+  "register": "1.1.0",
+  "tokensLocked": "2026-07-11",
+  "mode": "expressive",
+  "set": "clean",
+  "verdict": "PASSED THE PRESS",
+  "rules": [
+   {
+    "id": "R1 tilt",
+    "pass": true,
+    "detail": "2 rotated element(s); need >=2 with opposing signs"
+   },
+   {
+    "id": "R2 occlusion",
+    "pass": true,
+    "detail": "2 element(s) straddle the frame edge"
+   },
+   {
+    "id": "R3 figure",
+    "pass": true,
+    "detail": "1 sanctioned figure(s) (murmuration/emblem/camera/mascot)"
+   },
+   {
+    "id": "C2 plates",
+    "pass": true,
+    "detail": "paper/ink/red/gadsden only"
+   },
+   {
+    "id": "C1 clean-set",
+    "pass": true,
+    "detail": "artwork only · no disclaimer strip, no ticker"
+   },
+   {
+    "id": "C1 emdash",
+    "pass": true,
+    "detail": "none in prose"
+   },
+   {
+    "id": "K red-type",
+    "pass": true,
+    "detail": "red type at display sizes only"
+   },
+   {
+    "id": "L slam-share",
+    "pass": true,
+    "detail": "largest slam 96px vs 8% floor 86px"
+   },
+   {
+    "id": "T red-share",
+    "pass": true,
+    "detail": "0.0% of frame red-flooded (cap 15%)"
+   }
+  ],
+  "domSha256": "fef7c08f23c8bdb3885c48987d8e0028ca6aabe0b89e0f80883cfa00e890ded6",
+  "createdAt": "2026-07-14T16:13:49.216Z"
+ }
+}

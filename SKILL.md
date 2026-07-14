@@ -5,7 +5,7 @@ license: MIT for code and docs; brand artwork under LICENSE-assets.md; fonts SIL
 compatibility: Any agent that can read files. Token scripts need Node >= 18 (zero npm deps); browser previews need a static HTTP server plus network for CDN dependencies.
 metadata:
   author: the $DeFlock community
-  version: "1.0.0"
+  version: "1.1.0"
   user-invocable: true
 ---
 
@@ -24,8 +24,10 @@ deflock.org). Work in this order; where a rule conflicts with instinct, the rule
      stamp-class accents (rule R6).
    Before presenting anything, run the acceptance checklist for your artifact class from
    that same file. Automated: load `register/press-check.js` into the rendered artifact
-   (or call `pressCheck({mode})`) — it stamps PASSED/PULLED and logs a per-rule table;
-   ship only on PASS.
+   (or call `pressCheck({mode, set})` — set is "marked" (default) or "clean", doctrine 2)
+   — it stamps PASSED/PULLED and logs a per-rule table; ship only on PASS. On PASS, mint
+   the proof: `await pressReceipt({mode, set})` returns a tamper-evident press receipt
+   (spec: `register/RECEIPTS.md`) — save the JSON next to the artifact and share both.
 4. Absolutes — no interpretation: cameras always intact · disclaimer wording exact · no
    URLs outside the disclaimer · no emdashes in artifact copy · no invented numbers
    (unknown renders as "—" plus the reason) · $DEFLOCK never wraps · plates only
@@ -70,9 +72,11 @@ expert $DeFlock designer producing HTML artifacts or production code as the need
 - `_ds_bundle.js`, `_ds_manifest.json`, and `templates/*/support.js` are upstream build
   artifacts: committed, NOT rebuildable from this repo. Editing `components/*.jsx` does
   not update them — rendered kit/cards stay on the committed bundle.
-- press-check currently asserts the disclaimer (C1) in both sets, but doctrine 2 defines
-  clean-set artwork as having no footer — sanctioned clean-set art false-fails C1. Until
-  patched, judge C1 manually for clean-set artifacts and require every other row to pass.
+- Pass the right `set`: marked (default) asserts the disclaimer + ticker; clean asserts
+  artwork-only (NO disclaimer strip, NO ticker — doctrine 2). Wrong set = wrong verdict.
+- Receipts (`pressReceipt`) need WebCrypto: serve from localhost or https — `file://`
+  and plain-http hosts refuse to mint. Receipts bind the artifact HTML, not exported
+  PNG pixels — keep the source shareable alongside renders.
 - Red type below display sizes (≥24px, or ≥18.66px bold) fails contrast law — small text
   is always ink; express red as a non-text accent (ring, border, ▲ marker) instead.
 - Uppercase is applied via CSS `text-transform`, never typed into content; `$DEFLOCK`

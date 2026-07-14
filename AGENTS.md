@@ -25,7 +25,9 @@ straight containers, texture at budget, tilt only on stamp-class accents).
 | `tokens/generated/df-tokens.css` | GENERATED output — never hand-edit |
 | `tokens/fonts.css` · `tokens/base.css` | @font-face (5 statics + Oswald variable) · element baseline, focus ring, reduced-motion |
 | `register/register.json` | Machine-readable rules R1–R6 + per-artifact acceptance checklists (share-card, poster, sticker, x-post, ui-screen) |
-| `register/press-check.js` | Executable enforcement — audits a rendered DOM, stamps PASSED/PULLED |
+| `register/press-check.js` | Executable enforcement — audits a rendered DOM, stamps PASSED/PULLED; `pressReceipt()` mints tamper-evident proof-of-pass |
+| `register/RECEIPTS.md` · `register/verify-receipt.html` · `scripts/verify-receipt.mjs` | Press-receipt spec + browser verifier (re-run + binding) + CI integrity check |
+| `examples/` | Minimal receipted PASS artifacts (marked + clean) with their real receipts |
 | `register/REGISTER.md` | Human gloss + contribution model |
 | `components/` | actions/Button · forms/Input,FormRow · surfaces/Panel · feedback/Badge,Toast · data/Metric,StatRow · navigation/SiteHeader,FooterStrip · overlay/Sheet — each `<Name>.jsx` + `.d.ts` (props contract) + `.prompt.md` (usage) + a specimen card |
 | `ui_kits/website/` | Interactive 5-tab recreation of DeflockOnSol (reference implementation; `?presscheck` runs the ui audit) |
@@ -72,7 +74,9 @@ Hard rules, compressed (full detail: readme.md + docs/):
   `docs/migration-map.md` §2 maps every legacy class to a `Button` variant). Compose
   Panel/Badge/Toast/Metric/etc.; the kit screens show idiomatic composition.
 - **Ship gate:** run the `ui-screen` checklist in `register/register.json`, or load
-  `register/press-check.js` and require PASSED (kit: append `?presscheck`).
+  `register/press-check.js` and require PASSED (kit: append `?presscheck`). Shipping an
+  expressive artifact? Mint its receipt: `await pressReceipt({mode, set})` — see
+  `register/RECEIPTS.md`.
 
 Icons: Lucide (production uses `lucide-react`; kits load the UMD). Brand glyphs and
 marks: copy from `assets/` — never redraw; geometry SoT is the upstream Icons v2 master.

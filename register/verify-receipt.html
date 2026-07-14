@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify a press receipt · DeFlock Design</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="press-check.js"></script>
+<style>
+  body { max-width: 880px; margin: 0 auto; padding: 40px 24px; }
+  h1 { font-family: var(--df-font-slam); text-transform: uppercase; line-height: .96; margin: 0 0 6px; }
+  .k { font-family: var(--df-font-meta); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  form { display: grid; gap: 14px; margin: 22px 0; padding: 18px; border: 1.5px solid var(--df-text-ink, #14100a); background: rgba(255,255,255,.5); }
+  label { display: grid; gap: 6px; font-family: var(--df-font-label); }
+  input[type=text], textarea { border: 1.5px solid #14100a; background: #fff; padding: 10px; font: 400 13px/1.5 "Space Mono", monospace; border-radius: 0; }
+  textarea { min-height: 130px; }
+  button { justify-self: start; min-height: 44px; padding: 0 22px; border: 1.5px solid #14100a; background: #14100a; color: #f2ede3; font: 700 13px "Space Mono", monospace; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; box-shadow: 2.8px 2.8px 0 rgba(20,16,10,.36); border-radius: 0; }
+  button:hover { transform: translate(-1px,-1px); }
+  #rows { display: grid; gap: 8px; margin-top: 8px; }
+  .row { display: flex; gap: 12px; align-items: baseline; border: 1.5px solid #14100a; padding: 10px 12px; font: 400 13px/1.5 "Space Mono", monospace; background: #fff; }
+  .row b { font-weight: 700; letter-spacing: .12em; }
+  .ok b { color: #14100a; } .bad { border-color: #d92b1c; } .bad b { color: #d92b1c; }
+  #verdict { margin-top: 16px; display: inline-block; transform: rotate(-4deg); padding: 8px 14px; border: 3px solid #14100a; box-shadow: inset 0 0 0 2px #f2ede3, inset 0 0 0 4.5px #14100a; font: 700 15px "Space Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+  #verdict.bad { border-color: #d92b1c; color: #d92b1c; box-shadow: inset 0 0 0 2px #f2ede3, inset 0 0 0 4.5px #d92b1c; }
+  iframe { width: 100%; height: 560px; border: 1.5px dashed #14100a; margin-top: 20px; background: #fff; }
+  footer { margin-top: 34px; }
+</style>
+</head>
+<body>
+<h1>Verify a press receipt</h1>
+<p class="k">re-renders the artifact · re-runs the register · matches the receipt hash · spec: RECEIPTS.md</p>
+
+<form id="f">
+  <label>Artifact path (served from this repo root, e.g. <code>/examples/marked-example.html</code>)
+    <input type="text" id="path" placeholder="/path/to/artifact.html" required>
+  </label>
+  <label>Receipt JSON (paste the full <code>{ id, payload }</code> object)
+    <textarea id="receipt" required></textarea>
+  </label>
+  <button type="submit">RUN THE PRESS</button>
+</form>
+
+<div id="rows"></div>
+<div id="verdict" hidden></div>
+<iframe id="frame" sandbox="allow-same-origin" hidden></iframe>
+
+<footer class="k">COMMUNITY-MADE · UNAFFILIATED WITH DEFLOCK.ORG</footer>
+
+<script>
+const rows = document.getElementById("rows"), verdictEl = document.getElementById("verdict"), frame = document.getElementById("frame");
+function row(ok, name, detail) {
+  const d = document.createElement("div");
+  d.className = "row " + (ok ? "ok" : "bad");
+  const b = document.createElement("b");
+  b.textContent = ok ? "PASS" : "FAIL";
+  const s = document.createElement("span");
+  s.textContent = name + " — " + detail; // textContent: receipt JSON is untrusted input
+  d.append(b, s);
+  rows.appendChild(d);
+  return ok;
+}
+document.getElementById("f").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  rows.innerHTML = ""; verdictEl.hidden = true;
+  const { stableStringify, sha256Hex, serializeForReceipt } = window.__pressReceiptUtils;
+  function finish(ok) {
+    verdictEl.hidden = false;
+    verdictEl.className = ok ? "" : "bad";
+    verdictEl.textContent = ok ? "RECEIPT VERIFIED" : "VERIFICATION FAILED";
+  }
+  let receipt = null;
+  try { receipt = JSON.parse(document.getElementById("receipt").value); }
+  catch (err) { row(false, "receipt parse", err.message); return finish(false); }
+  if (!receipt || typeof receipt !== "object" || Array.isArray(receipt)) { row(false, "receipt shape", "not a { id, payload } object"); return finish(false); }
+  const p = (receipt.payload && typeof receipt.payload === "object") ? receipt.payload : {};
+  const okShape = row(!!(receipt.id && p.spec === "df-press-receipt/1" && Array.isArray(p.rules)), "receipt shape", "spec " + (p.spec || "?"));
+  if (!okShape) return finish(false);
+  const id = "DF-" + (await sha256Hex(stableStringify(p))).slice(0, 16);
+  const okId = row(id === receipt.id, "receipt integrity", id === receipt.id ? receipt.id + " recomputes" : "payload altered — computed " + id);
+  const okRules = row(p.verdict === "PASSED THE PRESS" && p.rules.every(r => r && r.pass), "recorded verdict", p.verdict + " · " + p.rules.length + " rules");
+  // Script-free re-render: fetch the source, strip ALL scripts, render in a sandboxed
+  // iframe (no allow-scripts — hostile artifact JS never executes), then run THIS
+  // page's own press-check against that DOM. The artifact cannot fake its checker.
+  const path = document.getElementById("path").value;
+  let srcText;
+  try {
+    const resp = await fetch(path);
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    srcText = await resp.text();
+  } catch (err) { row(false, "artifact fetch", path + " — " + err.message + " (same server required)"); return finish(false); }
+  const parsed = new DOMParser().parseFromString(srcText, "text/html");
+  parsed.querySelectorAll("script").forEach(n => n.remove());
+  const base = parsed.createElement("base");
+  base.href = new URL(path, location.href).href;
+  base.setAttribute("data-press-inject", "");
+  parsed.head.insertBefore(base, parsed.head.firstChild);
+  frame.hidden = false;
+  frame.srcdoc = "<!doctype html>" + parsed.documentElement.outerHTML;
+  await new Promise((res) => { frame.onload = res; setTimeout(res, 8000); });
+  await new Promise(r => setTimeout(r, 500)); // fonts/styles settle
+  const cdoc = frame.contentDocument;
+  const check = pressCheck({ root: cdoc.body, mode: p.mode, set: p.set, quiet: true, stamp: false });
+  const okCheck = row(check.verdict === "PASSED THE PRESS", "register re-run, script-free (" + p.mode + "/" + p.set + ")", check.verdict + (check.fails.length ? " · " + check.fails.join(", ") : ""));
+  const hash = await sha256Hex(serializeForReceipt(cdoc));
+  const okBind = row(hash === p.domSha256, "artifact binding", hash === p.domSha256 ? "document sha256 matches" : "hash mismatch — this is not the receipted artifact (got " + hash.slice(0, 16) + "…)");
+  finish(okShape && okId && okRules && okCheck && okBind);
+});
+</script>
+</body>
+</html>

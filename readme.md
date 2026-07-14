@@ -33,7 +33,10 @@ Voice in one line: *declarative watchdog.* "THEY MAP YOUR PLATES. WE MAP THE CAM
    social artifact with the brand check pre-wired) and edit the copy and art.
 4. **Check it:** in the browser console run `pressCheck({mode: "expressive"})` — it
    prints a per-rule table and stamps **PASSED THE PRESS** or **PULLED**. Fix, re-run.
-5. **Ship it** once it passes. Marked artifacts carry the exact line
+5. **Get your receipt:** `await pressReceipt({mode: "expressive"})` mints a
+   tamper-evident proof that this exact artifact passed — WE KEEP RECEIPTS. Save the
+   JSON and post it with your work; anyone can verify it (`register/RECEIPTS.md`).
+6. **Ship it** once it passes. Marked artifacts carry the exact line
    `COMMUNITY-MADE · UNAFFILIATED WITH DEFLOCK.ORG` — that's the deal (see
    [LICENSE-assets.md](LICENSE-assets.md)).
 
@@ -147,7 +150,9 @@ rebuildable locally via `scripts/generate-tokens.mjs`.
   + `tokens/base.css` (element baseline, focus, reduced-motion).
 - `register/` — **register.json** (machine-readable composition rules R1–R6 + per-artifact
   acceptance checklists) + REGISTER.md (gloss + contribution model) + **press-check.js**
-  (executable DOM audit — stamps PASSED THE PRESS / PULLED with a per-rule console table).
+  (executable DOM audit — stamps PASSED THE PRESS / PULLED with a per-rule console table)
+  + **press receipts** (tamper-evident proof-of-pass: RECEIPTS.md spec,
+  verify-receipt.html full verifier, `scripts/verify-receipt.mjs` for CI/bots).
 - `templates/` — `site-page/` (page shell) + `share-card/` (1080² expressive artifact,
   press-check wired) — the starting points consuming projects seed from.
 - `components/` — Button (`actions/`) · Input, FormRow (`forms/`) · Panel (`surfaces/`) ·
